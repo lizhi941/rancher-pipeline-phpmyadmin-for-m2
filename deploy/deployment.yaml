@@ -31,9 +31,9 @@ spec:
       - name: pipeline-docker-registry
       containers:
         - name: phpmyadmin
-          image: "phpmyadmin/phpmyadmin:4.8.4"
+          image: phpmyadmin/phpmyadmin:4.8.4
           env:
-          - name: "PMA_ARBITRARY"
-            value: 1   
+          - name: PMA_ARBITRARY
+            value: "1"   
           ports:
           - containerPort: 80
