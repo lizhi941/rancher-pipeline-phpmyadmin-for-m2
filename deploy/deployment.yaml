@@ -1,0 +1,39 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: phpmyadmin-service
+spec:
+  selector:
+    app: phpmyadmin
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      imagePullSecrets:
+      - name: pipeline-docker-registry
+      containers:
+        - name: phpmyadmin
+          image: phpmyadmin/phpmyadmin:4.8.4
+          env:
+          - name: PMA_ARBITRARY
+              value: 1   
+          ports:
+          - containerPort: 80
