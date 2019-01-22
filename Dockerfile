@@ -66,7 +66,7 @@ COPY php.ini /usr/local/etc/php/conf.d/php-phpmyadmin.ini
 
 # Copy main script
 COPY run.sh /run.sh
-
+RUN chmod +x /run.sh
 # We expose phpMyAdmin on port 80
 EXPOSE 80
 
